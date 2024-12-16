@@ -315,18 +315,20 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   ///
   /// The size of the output image is controlled by [size].
   /// All drawables will be scaled according to that image size.
-  Future<ui.Image> renderImage(Size size) async {
+  Future<ui.Image> renderImage(Size size, bool paintBackground) async {
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
     final painter = Painter(
       drawables: value.drawables,
       scale: painterKey.currentContext?.size ?? size,
-      background: value.background,
+      background: paintBackground ? value.background : null,
     );
+    final paint = Paint()
+      ..color = Colors.blue
+      ..style = PaintingStyle.fill
+      ..isAntiAlias = true; // Enable anti-aliasing
     painter.paint(canvas, size);
-    return await recorder
-        .endRecording()
-        .toImage(size.width.floor(), size.height.floor());
+    return await recorder.endRecording().toImage(size.width.floor(), size.height.floor());
   }
 
   /// The currently selected object drawable.
@@ -433,8 +435,7 @@ class PainterControllerValue {
   }
 
   @override
-  int get hashCode => hashValues(
-      hashList(_drawables), background, settings, selectedObjectDrawable);
+  int get hashCode => Object.hash(_drawables, background, settings, selectedObjectDrawable);
 }
 
 /// Private class that is used internally to represent no

@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"dart.flutterSdkPath": ".fvm/flutter_sdk",
+		// Remove .fvm files from search
+		"search.exclude": {
+		  "**/.fvm": true
+		},
+		// Remove from file watching
+		"files.watcherExclude": {
+		  "**/.fvm": true
+		},
+		"dart.closingLabels": true,
+		"dart.previewFlutterUiGuides": true,
+		"editor.bracketPairColorization.enabled": true,
+		"dart.lineLength": 120,
+		"editor.rulers": [
+			120
+		],
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit"
+		},
+		"[dart]": {
+			"editor.rulers": [
+				120
+			],
+			"editor.formatOnSave": true,
+		},
+		"dart.flutterWebRenderer": "canvaskit",
+		"java.configuration.updateBuildConfiguration": "disabled",
+	}
+}
